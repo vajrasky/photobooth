@@ -43,6 +43,7 @@
     </script>
   </head>
   <body>
+    <form action="/save" method="post">
     <div style="width:330px;float:left;">
       <div id="webcam">
       </div>
@@ -60,5 +61,50 @@
       <p><textarea id="formfield" style="width:190px;height:70px;"></textarea></p>
       <p><img id="image" style="width:200px;height:153px;"/></p>
     </div>
+    <div style="clear: both;">
+      <label>Nama:</label>
+      <input type="text" style="width: 300px;" name="name" />
+    </div>
+    <div>
+      <label>Jenis Kelamin:</label>
+      <select name="sex">
+        <option value="male">Cowok</option>
+        <option value="female">Cewek</option>
+        <option value="transgender">Transgender</option>
+        <option value="">Gak jelas</option>
+      </select>
+    </div>
+    <div>
+      <label>Divisi:</label>
+      <select name="division">
+        <option value="online_marketing">Pemasaran dunia maya (online marketing)</option>
+        <option value="traditional_marketing">Pemasaran tradisional (traditional marketing)</option>
+        <option value="engineering">Insinyur peranti lunak (engineering)</option>
+      </select>
+    </div>
+    <div>
+      <label>Alamat surat elektronik:</label>
+      <input type="text" style="width: 300px;" name="email" />
+    </div>
+    <div>
+      <label>Telepon:</label>
+      <input type="text" style="width: 300px;" name="phone" />
+    </div>
+    <div>
+      <label>Status:</label>
+      <select name="status">
+        <option value="jomblo">jomblo</option>
+        <option value="tunangan">tunangan</option>
+        <option value="menikah">menikah</option>
+        <option value="selibat">selibat</option>
+        <option value="baru_putus">baru putus</option>
+        <option value="udah_ada_tapi_masih_cari">udah ada, tapi masih cari yang lebih baik! ^_^</option>
+      </select>
+    </div>
+
+    <div>
+      <input type="submit" value="Kirim data" />
+    </div>
+    </form>
   </body>
 </html>
