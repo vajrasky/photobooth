@@ -1,5 +1,5 @@
 require 'sinatra'
 
 get '/' do
-  render "demo.htm"
+  erb :index
 end
