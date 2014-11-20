@@ -1,0 +1,161 @@
+<%= form_for @person, url: save_people_path do |f| %>
+
+  <div style="width:330px;float:left;">
+    <div id="webcam"></div>
+    <img src="webcamlogo.png" style="vertical-align:text-top; display: inline-block;<D-r>"/>
+    <select id="cameraNames" size="1" onChange="changeCamera()" style="width:245px; font-size:10px; height:25px; display: inline-block;">
+    </select>
+  </div>
+
+  <div style="width:135px;float:left;">
+    <p><button class="btn btn-small" id="btn2" onclick="base64_tofield_and_image($.scriptcam.getFrameAsBase64()); return false;">Snapshot to image</button></p>
+  </div>
+
+  <div style="width:200px;float:left;">
+    <p><textarea id="image_base64" style="display:none; width:190px;height:70px;"></textarea></p>
+    <p><img id="image" style="width:200px;height:153px;"/></p>
+  </div>
+
+  <div style="clear:both; width: 100%;"></div>
+
+  <div>
+    <label>Nama:</label>
+    <input type="text" style="width: 300px;" name="name" />
+  </div>
+
+  <div>
+    <label>Jenis Kelamin:</label>
+    <select name="sex">
+      <option value="male">Cowok</option>
+      <option value="female">Cewek</option>
+      <option value="transgender">Transgender</option>
+      <option value="">Tidak mau jawab</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Divisi:</label>
+    <select name="division">
+      <option value="pemred_and_sekred">Pemred dan Sekred</option>
+      <option value="digital_marketing">Digital Marketing</option>
+      <option value="redaksi_bola">Redaksi Bola</option>
+      <option value="redaksi_showbiz_dan_bintang">Redaksi Showbiz dan Bintang</option>
+      <option value="redaksi_bisnis">Redaksi Bisnis</option>
+      <option value="redaksi_health">Redaksi Health</option>
+      <option value="redaksi_tekno">Redaksi Tekno</option>
+      <option value="redaksi_lifestyle">Redaksi Lifestyle</option>
+      <option value="redaksi_automotive">Redaksi Automotive</option>
+      <option value="redaksi_news">Redaksi News</option>
+      <option value="community_dev_and_monitoring">Community Dev and Monitoring</option>
+      <option value="kanal_foto_and_gathering_foto_video">Kanal Foto dan Gathering Foto Video</option>
+      <option value="multimedia">Multimedia</option>
+      <option value="creative">Creative</option>
+      <option value="operation">Operation</option>
+      <option value="finance_accounting">Finance Accounting</option>
+      <option value="ga_and_purchasing">GA and Purchasing</option>
+      <option value="legal">Legal</option>
+      <option value="hrd">HRD</option>
+      <option value="customer_service">Customer Service</option>
+      <option value="project">Project</option>
+      <option value="digital_and_sales_support">Digital and Sales Support</option>
+      <option value="sales_marketing">Sales Marketing</option>
+      <option value="engineering">Engineering</option>
+      <option value="product_development">Product Development</option>
+      <option value="marketing_and_business_alliance_div">Marketing and Business Alliance Div</option>
+      <option value="social_media">Social Media</option>
+      <option value="busdev_and_vas">Busdev and Vas</option>
+      <option value="marketing_and_brand">Marketing and Brand</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Alamat surat elektronik:</label>
+    <input type="text" style="width: 300px;" name="email" />
+  </div>
+
+  <div>
+    <label>Telepon:</label>
+    <input type="text" style="width: 300px;" name="phone_number" />
+  </div>
+
+  <div>
+    <label>Status:</label>
+    <select name="status">
+      <option value="single">jomblo</option>
+      <option value="engaged">tunangan</option>
+      <option value="married">menikah</option>
+      <option value="celibacy">selibat</option>
+      <option value="just_broke_up">baru putus</option>
+      <option value="divorcee">cerai</option>
+      <option value="engaged_but_seeking">udah ada, tapi masih cari yang lebih baik! ^_^</option>
+    </select>
+  </div>
+
+  <br /><br /><br />
+
+  <div><h2>Survei</h2></div>
+
+  <div>=======================</div>
+
+  <div>
+    <label>Kalau seandainya Anda terdampar di suatu pulau selama sisa hidup Anda dan Anda diperbolehkan mengambil satu orang lawan jenis dari KMK untuk menemani Anda,
+           siapakah yang bakal Anda pilih?:</label>
+    <input type="text" style="width: 300px;" name="hobbies" />
+  </div>
+
+  <div>
+    <input type="submit" value="Kirim data" />
+  </div>
+
+<% end %>
+
+<% content_for :javascript do %>
+
+
+  <script language="JavaScript" src="/scriptcam.js"></script>
+  <script language="JavaScript">
+    $(document).ready(function() {
+      $("#webcam").scriptcam({
+        showMicrophoneErrors:false,
+        onError:onError,
+        cornerRadius:20,
+        cornerColor:'e3e5e2',
+        onWebcamReady:onWebcamReady,
+        uploadImage:'upload.gif',
+        onPictureAsBase64:base64_tofield_and_image
+      });
+    });
+
+    function base64_tofield() {
+      $('#image_base64').val($.scriptcam.getFrameAsBase64());
+    };
+
+    function base64_toimage() {
+      $('#image').attr("src","data:image/png;base64,"+$.scriptcam.getFrameAsBase64());
+    };
+
+    function base64_tofield_and_image(b64) {
+      $('#image_base64').val(b64);
+      $('#image').attr("src","data:image/png;base64,"+b64);
+    };
+
+    function changeCamera() {
+      $.scriptcam.changeCamera($('#cameraNames').val());
+    }
+
+    function onError(errorId,errorMsg) {
+      $( "#btn1" ).attr( "disabled", true );
+      $( "#btn2" ).attr( "disabled", true );
+      alert(errorMsg);
+    }
+
+    function onWebcamReady(cameraNames,camera,microphoneNames,microphone,volume) {
+      $.each(cameraNames, function(index, text) {
+        $('#cameraNames').append( $('<option></option>').val(index).html(text) )
+      });
+      $('#cameraNames').val(camera);
+    }
+  </script>
+
+<% end %>
+
