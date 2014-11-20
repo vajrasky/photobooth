@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   private
 
   def person_params
-    params.permit(:name, :sex, :division, :email, :phone_number, :hobbies, :status)
+    params.permit(:portrait_base64, :name, :sex, :division, :email, :phone_number, :status)
   end
 
 end

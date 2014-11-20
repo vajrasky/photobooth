@@ -25,8 +25,8 @@ article
     - Person.all.each do |person|
       li.person
         figure
-          - if person.portrait.present?
-            img src=person.portrait.original_base64
+          - if person.portrait_base64.present?
+            img src=person.portrait_base64
         h5 = person.name
 
 footer
