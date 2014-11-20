@@ -1,0 +1,149 @@
+@charset 'utf-8';
+
+@import 'normalize-rails/normalize.css';
+@import 'bourbon';
+@import 'base/grid-settings';
+@import 'neat';
+@import 'base/base';
+
+@import 'refills/search-bar';
+@import 'refills/sliding-menu';
+@import 'refills/type-system-rounded';
+
+$header-background: rgb(92, 92, 92);
+$header-color: rgb(255, 255, 255);
+
+body {
+  max-width: 40em;
+  margin: 0 auto;
+}
+
+.sliding-menu-button {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  margin-left: -1.5em;
+}
+
+header {
+  background: $header-background;
+  color: $header-color;
+  text-align: center;
+  padding: 3em 0 2em;
+  margin-bottom: 1em;
+  @include clearfix;
+
+  h1 {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  li {
+    @include inline-block;
+    margin-right: 1em;
+  }
+
+  .search-types {
+    font-size: 1.5em;
+    font-weight: bold;
+    @include clearfix;
+
+    a {
+      color: $header-color;
+
+      &:hover {
+        color: $base-link-color;
+      }
+    }
+  }
+
+  .search-bar {
+    width: 90%;
+    margin: 0.5em 0;
+    font-size: 1.5em;
+    color: $base-font-color;
+    @include clearfix;
+
+    button img {
+      max-width: 24px;
+      height: 81%;
+    }
+  }
+
+  .search-suggestions {
+    font-size: 1.25em;
+    color: $medium-gray;
+    font-weight: bold;
+    @include clearfix;
+  }
+
+}
+
+article {
+  ul {
+    @include clearfix;
+
+    li {
+      @include span-columns(3);
+      @include omega(4n);
+      @include pad();
+    }
+  }
+}
+
+.person {
+  text-align: center;
+
+  figure {
+    height: 0;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 100%;
+
+    overflow: hidden;
+
+    background: $light-gray;
+    border: 1px solid darken($light-gray, 10%);
+    border-radius: $base-border-radius;
+
+    img {
+      width: 102%;
+      max-width: none;
+      border-radius: $base-border-radius;
+    }
+  }
+
+  h5 {
+    @include ellipsis();
+    margin-top: 0.5em;
+  }
+}
+
+footer {
+  margin: 2em 2em 3em;
+  border-top: 3px solid $light-gray;
+  padding-top: 2em;
+
+  text-align: center;
+
+  li {
+    @include inline-block;
+    margin-right: 1em;
+  }
+
+  .departments {
+    font-size: 1.5em;
+    font-weight: bold;
+    @extend h2;
+  }
+
+  .copyright {
+    font-size: 1.22em;
+    color: $medium-gray;
+  }
+
+  .disclamer {
+    color: $medium-gray;
+  }
+
+}
