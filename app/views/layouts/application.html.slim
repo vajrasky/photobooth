@@ -1,0 +1,46 @@
+doctype html
+
+html
+  head
+    meta charset="utf-8"
+    meta content="NOODP" name="ROBOTS"
+    meta content="initial-scale=1" name="viewport"
+
+    title = title
+
+    / link href="http://fonts.googleapis.com/css?family=Nunito:400,700,300" rel="stylesheet" type="text/css"
+    / link href="http://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" type="text/css"
+
+    = stylesheet_link_tag :application, media: "all"
+    = csrf_meta_tags
+
+  body class="#{body_class} type-system-sans"
+
+    = render "refills/sliding_menu"
+
+    header
+      - if content_for? :header
+        = yield :header
+      - else
+        h1 = image_tag 'logo.png'
+
+    = render "flashes"
+
+    = yield
+
+    footer
+      ul.departments
+        - %w(Redaksi Engineering Marketing Product Design Sales).shuffle.each do |department|
+          li.department = department
+
+
+      p.copyright
+        | © Copyright #{Date.today.year} KMK Online.
+        br
+        | All rights reserved.
+
+
+      p.disclamer Informasi yang tersedia pada situs ini, termasuk tetapi tidak terbatas pada link, merek dagang, gambar serta ikon dimiliki ole pihak ketiga.
+
+    = render "javascript"
+

@@ -1,24 +1,7 @@
-header
-
-  h1
-    = image_tag 'logo.png'
-
+- content_for :header
+  h1 = image_tag 'logo.png'
   form#search
-
-    ul.search-types
-      li
-        a Latest
-      li
-        a Random!
-      li
-        a Most Popular
-
     = render "refills/search_bar"
-
-    ul.search-suggestions
-      li Latest
-      li Random!
-      li Most Popular
 
 article
   ul.people
@@ -28,18 +11,4 @@ article
           - if person.portrait_base64.present?
             img src=person.portrait_base64
         h5 = person.name
-
-footer
-  ul.departments
-    - %w(Redaksi Engineering Marketing Product Design Sales).shuffle.each do |department|
-      li.department = department
-
-
-  p.copyright
-    | © Copyright #{Date.today.year} KMK Online.
-    br
-    | All rights reserved.
-
-
-  p.disclamer Informasi yang tersedia pada situs ini, termasuk tetapi tidak terbatas pada link, merek dagang, gambar serta ikon dimiliki ole pihak ketiga.
 
