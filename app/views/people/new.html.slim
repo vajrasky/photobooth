@@ -154,42 +154,45 @@
 
   .actions = f.submit 'Kirim Data'
 
-- content_for :javascript do
+  - content_for :javascript do
 
-  = javascript_include_tag 'scriptcam.js'
+    = javascript_include_tag 'scriptcam.js'
 
-  javascript:
+    javascript:
 
-    function onWebcamReady(cameraNames, camera, microphoneNames, microphone, volume) {
-      $.each(cameraNames, function(index, text) {
-        console.log("cameraName ", index, " is called: ", text);
+      function onWebcamReady(cameraNames, camera, microphoneNames, microphone, volume) {
+        $.each(cameraNames, function(index, text) {
+          console.log("cameraName ", index, " is called: ", text);
+        });
+
+        $.scriptcam.changeCamera( camera );
+      }
+
+      function base64_tofield_and_image(b64) {
+        var src = "data:image/png;base64," + b64;
+        $('input#person_portrait_base64').val(b64);
+        $('img#person_portrait').attr("src", src);
+      };
+
+      function onError(errorId,errorMsg) {
+        alert(errorMsg);
+      }
+
+      $("#webcam").scriptcam({
+        path:                     '/assets/',  // TODO: it's nasty how this is all relative :-(
+        width:                    800,
+        height:                   600,
+        onWebcamReady:            onWebcamReady,
+        onPictureAsBase64:        base64_tofield_and_image,
+        onError:                  onError
       });
 
-      $.scriptcam.changeCamera( camera );
-    }
+      $("#snapshot").on('click', function() {
+        base64_tofield_and_image( $.scriptcam.getFrameAsBase64() );
+        return false;
+      });
 
-    function base64_tofield_and_image(b64) {
-      var src = "data:image/png;base64," + b64;
-      $('input#person_portrait_base64').val(b64);
-      $('img#person_portrait').attr("src", src);
-    };
-
-    function onError(errorId,errorMsg) {
-      alert(errorMsg);
-    }
-
-    $("#webcam").scriptcam({
-      path:                     '/assets/',  // TODO: it's nasty how this is all relative :-(
-      width:                    800,
-      height:                   600,
-      onWebcamReady:            onWebcamReady,
-      onPictureAsBase64:        base64_tofield_and_image,
-      onError:                  onError
-    });
-
-    $("#snapshot").on('click', function() {
-      base64_tofield_and_image( $.scriptcam.getFrameAsBase64() );
-      return false;
-    });
-
-
+      var base64_input = $('input#person_portrait_base64');
+      if( base64_input.val() != '' ) {
+        base64_tofield_and_image(base64_input.val());
+      }
