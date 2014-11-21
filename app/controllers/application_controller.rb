@@ -10,6 +10,13 @@ class ApplicationController < ActionController::Base
   end
 
   def index
+    @people = Person.order(:created_at)
+
+    if @q = params[:q]
+      query = "%#{@q}%"
+      @people = @people.where("name ilike :query or email ilike :query", query: query)
+    end
+
   end
 
 end

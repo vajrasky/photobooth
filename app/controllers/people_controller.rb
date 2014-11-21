@@ -6,6 +6,8 @@ class PeopleController < InheritedResources::Base
     end
   end
 
+  protected
+
   def permitted_params
     params.permit(:person => [
         :portrait_base64, :name, :sex, :division, :email, :phone_number, :status,
