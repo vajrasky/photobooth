@@ -9,8 +9,7 @@ To-Dos
 
 - internationalization of validations and form fields
 - placeholders for inputs -- suggestions for email etc
-
-
+- search!
 
 
 

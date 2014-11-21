@@ -6,4 +6,16 @@
   figure
     = image_tag @person.portrait.url
 
-  p = @person.hobbies
+  dl
+    dt Alamat surat elektronik
+    dd = @person.email
+
+    dt Telepon
+    dd = @person.phone_number
+
+    dt Status
+    dd = @person.status
+
+    dt Hobi
+    dd = @person.hobbies
+
