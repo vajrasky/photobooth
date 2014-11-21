@@ -12,16 +12,12 @@
     = image_tag 'webcamlogo.png', style: "vertical-align:text-top; display: inline-block;"
     select#cameraNames onchange="changeCamera()" size="1" style=("width:245px; font-size:10px; height:25px; display: inline-block;")
 
-  div style="width:135px;float:left;"
-    button#btn2.btn.btn-small onclick=("base64_tofield_and_image($.scriptcam.getFrameAsBase64()); return false;")  Snapshot to image
+  .field
+    button.button onclick=("base64_tofield_and_image( $.scriptcam.getFrameAsBase64() ); return false;") Snapshot to image
+    = f.hidden_field :portrait_base64
+    img#person_portrait style="width:200px;height:153px;"
 
-  div style="width:200px;float:left;"
-    p
-      textarea#portrait_base64 name="portrait_base64" style=("display:none; width:190px;height:70px;")
-    p
-      img#portrait style="width:200px;height:153px;" /
-
-  div style=("clear:both; width: 100%;")
+  div style="width:100%; clear:both"
 
   .field
     = f.label :name, 'Nama:'
@@ -29,12 +25,16 @@
 
   .field
     = f.label :sex, 'Jenis Kelamin:'
-    = f.select :sex, ['Cowok', 'Cewek', 'Transgender', 'Tidak mau jawab']
+    = f.select :sex, ['Cowok', 'Cewek', 'Transgender', 'Tidak mau jawab'], include_blank: true
 
   .field
     = f.label :division, 'Divisi:'
-    = f.select :division, ['Pemred dan Sekred', 'Digital Marketing', 'Redaksi Bola', 'Redaksi Showbiz dan Bintang', 'Redaksi Bisnis', 'Redaksi Health', 'Redaksi Tekno', 'Redaksi Lifestyle', 'Redaksi Automotive', 'Redaksi News', 'Community Dev and Monitoring', 'Kanal Foto dan Gathering Foto Video', 'Multimedia', 'Creative', 'Operation', 'Finance Accounting', 'GA and Purchasing', 'Legal', 'HRD', 'Customer Service', 'Project', 'Digital and Sales Support', 'Sales Marketing',
-'Engineering', 'Product Development', 'Marketing and Business Alliance Div', 'Social Media', 'Busdev and Vas', 'Marketing and Brand']
+    = f.select :division, [ 'Pemred dan Sekred', 'Digital Marketing', 'Redaksi Bola', 'Redaksi Showbiz dan Bintang',
+      'Redaksi Bisnis', 'Redaksi Health', 'Redaksi Tekno', 'Redaksi Lifestyle', 'Redaksi Automotive',
+      'Redaksi News', 'Community Dev and Monitoring', 'Kanal Foto dan Gathering Foto Video', 'Multimedia',
+      'Creative', 'Operation', 'Finance Accounting', 'GA and Purchasing', 'Legal', 'HRD', 'Customer Service',
+      'Project', 'Digital and Sales Support', 'Sales Marketing', 'Engineering', 'Product Development',
+      'Marketing and Business Alliance Div', 'Social Media', 'Busdev and Vas', 'Marketing and Brand'], include_blank: true
 
   .field
     = f.label :email, 'Alamat surat elektronik:'
@@ -46,7 +46,7 @@
 
   .field
     = f.label :status, 'Status:'
-    = f.select :status, [ 'jomblo', 'tunangan', 'menikah', 'selibat', 'baru putus', 'cerai', 'udah ada, tapi masih cari yang lebih baik! ^_^' ]
+    = f.select :status, [ 'Jomblo', 'Tunangan', 'Menikah', 'Selibat', 'Baru Putus', 'Cerai', 'Udah ada, tapi masih cari yang lebih baik! ^_^' ], include_blank: true
 
   /
     div
@@ -79,18 +79,10 @@
       });
     });
 
-    function base64_tofield() {
-      $('#portrait_base64').val($.scriptcam.getFrameAsBase64());
-    };
-
-    function base64_toimage() {
-      $('#portrait').attr("src","data:image/png;base64,"+$.scriptcam.getFrameAsBase64());
-    };
-
     function base64_tofield_and_image(b64) {
       var src = "data:image/png;base64," + b64;
-      $('#portrait_base64').val(src);
-      $('#portrait').attr("src", src);
+      $('input#person_portrait_base64').val(src);
+      $('img#person_portrait').attr("src", src);
     };
 
     function changeCamera() {
@@ -98,7 +90,6 @@
     }
 
     function onError(errorId,errorMsg) {
-      $( "#btn2" ).attr( "disabled", true );
       alert(errorMsg);
     }
 
