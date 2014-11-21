@@ -134,6 +134,25 @@ article {
   }
 }
 
+.new_person {
+  h1 {
+    margin: 2em 0 1em;
+  }
+
+  .field {
+    margin-bottom: 2em;
+  }
+
+  .field small {
+    position: relative;
+    top: -1em;
+  }
+
+  .field .label--muted {
+    font-weight: normal;
+  }
+}
+
 footer {
   margin: 2em 2em 3em;
   border-top: 3px solid $light-gray;

@@ -14,6 +14,6 @@ article
       li.person
         figure
           - if person.portrait_base64.present?
-            img src=person.portrait_base64
+            img src="data:image/png;base64,#{}" 
         h5 = person.name
 

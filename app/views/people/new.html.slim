@@ -48,21 +48,115 @@
     = f.label :status, 'Status:'
     = f.select :status, [ 'Jomblo', 'Tunangan', 'Menikah', 'Selibat', 'Baru Putus', 'Cerai', 'Udah ada, tapi masih cari yang lebih baik! ^_^' ], include_blank: true
 
-  /
-    div
-      h2 Survei
+  .field
+    = f.label :hobbies, 'Hobi (maksimum tiga, pisahkan dengan koma):'
+    = f.text_field :hobbies
+    small Contoh: berpantun, merenungi makna hidup, lari
 
-    div | =======================
+  .field
+    = f.label :what_to_do_at_second_night
+      | Pada malam kedua (hari Kamis), setelah makan malam, akan ada dua pilihan bagi Anda.
+      | Pertama, ke Maja House (tempat minum2). Kedua, tinggal di vila. Manakah yang akan
+      | Anda pilih? Ini pertanyaan logistik biar panitia gampang urus kalian pas waktunya.
+    = f.select :what_to_do_at_second_night, [ 'Ke Maja House.',
+                                              'Tinggal di vila.',
+                                              'Masih menunggu inspirasi dari Yang Di Atas.'], include_blank: true
+  h2 Survei
 
-    div
-      label
-        | Kalau seandainya Anda terdampar di suatu pulau selama sisa hidup Anda dan Anda diperbolehkan mengambil satu orang lawan jenis dari KMK untuk menemani Anda,
-        | siapakah yang bakal Anda pilih?:
-      input name="hobbies" style=("width: 300px;") type="text" /
+  p
+    | Jawaban Anda tidak bakal dipublikasikan secara personal tapi data secara general
+    | akan dipublikasikan. Contoh: misalnya Anda memilih jawaban B, tapi 80% orang dari KMK memilih jawaban A.
+    | Fakta 80% orang memilih jawaban A
+    | akan dikasih tahu ke semua orang, tapi fakta Anda memilih jawaban B akan disimpan rahasia.
 
+  .field
+    = f.label :dump_in_island_opposite_sex
+      | Kalau seandainya Anda terdampar di suatu pulau tak berpenghuni selama sisa hidup Anda dan Anda
+      | diperbolehkan mengambil satu orang lawan jenis dari KMK untuk menemani Anda,
+      | siapakah yang bakal Anda pilih? Kasih departmennya juga. Jaga-jaga kalau ada orang yang
+      | memiliki nama sama tapi dari departmen yang beda. (Orang yang paling banyak dipilih akan mendapat
+      | hadiah hiburan.)
+    = f.text_field :dump_in_island_opposite_sex
+
+
+  .field
+    = f.label :dump_in_island_same_sex
+      | Sama dengan pertanyaan di atas. Tapi untuk sesama jenis. (Orang yang paling banyak
+      | dipilih akan mendapat hadiah hiburan.)
+    = f.text_field :dump_in_island_same_sex
+
+  .field
+    = f.label :what_to_do_with_500k_rupiah
+      | Kalau Anda diberi Rp 500ribu tunai secara tiba-tiba, bagaimanakah Anda
+      | akan menghabiskan uangnya?
+    =f.select :what_to_do_with_500k_rupiah, [ 'Donasi ke yayasan amal',
+                                              'Beli barang-barang untuk kepentingan pribadi',
+                                              'Traktir teman-teman kamu yang bekerja di KMK',
+                                              'Beli barang spesial dan kasih ke salah satu orang di KMK' ], include_blank: true
+    small
+      | Satu orang yang beruntung akan dipilih secara acak dan mendapatkan hadiah Rp500rb
+      | dan dia harus menghabiskan uang seperti yang dia pilih. Jadi khusus dia, jawabannya
+      | akan dibuat publik dan dia harus mempertanggungjawabkan pengeluaran dia. Dan dia harus kasih bukti.
+
+
+  .field
+    label
+      | Kalau Anda dikasih kekuatan super yang cuma berlaku untuk orang-orang di KMK,
+      | manakah yang akan Anda pilih?
+
+    = f.label :superpower_mindreader, class: 'label--muted'
+      = f.radio_button :superpower, 'mindreader'
+      | Anda punya kekuatan untuk membaca pikiran dan memori (termasuk memori yang mereka tidak ingat lagi)
+      | semua orang yang bekerja di KMK. Cuma orang yang bekerja di KMK. Tidak termasuk selebritis yang
+      | datang ke KMK.
+
+    = f.label :superpower_money, class: 'label--muted'
+      = f.radio_button :superpower, 'money'
+      | Anada mendapatkan penghasilan 2x lipat dari orang yang memiliki gaji
+      | paling tinggi di KMK ditambah 5% dari gaji semua orang yang bekerja di KMK.
+      | Dan tidak dipotong pajak.
+
+    = f.label :superpower_charisma, class: 'label--muted'
+      = f.radio_button :superpower, 'charisma'
+      | Anda memiliki karisma dan daya tarik yang tinggi. Contoh: kalau Anda cowok,
+      | dan bertemu dengan cewek yang mengidolakan Tom Cruise, cewek
+      | itu akan melihat kamu seperti melihat Tom Cruise. Kalau Anda cowok,
+      | dan bertemu dengan cowok yang mengidolakan Soekarno, cowok
+      | itu akan memperlakukan kamu seperti memperlakukan Soekarno. Karisma dan daya tarik ini cuma
+      | berlaku untuk orang-orang yang bekerja di KMK.
+
+    = f.label :superpower_skill, class: 'label--muted'
+      = f.radio_button :superpower, 'skill'
+      | Anda mendapatkan semua pengetahuan dan kemampuan dari orang-orang
+      | yang bekerja di KMK. Semua pengetahuan termasuk pengetahuan yang tidak dipakai
+      | untuk bekerja di KMK. Jadi kalau ada jurnalis yang bekerja di Showbiz, dan dia bisa berbahasa Jawa halus,
+      | kamu langsung bisa berbahasa Jawa halus dan menulis berita gosip selebritis.
+
+    = f.label :superpower_ceo, class: 'label--muted'
+      = f.radio_button :superpower, 'ceo'
+      | Anda mendapatkan posisi CEO KMK
+
+  h2 Secret sender
+
+  .field
+    = f.label :message
+      | Kirim pesan. Pesan Anda akan diusahakan untuk dibacakan di Outing. Anda tidak wajib mengirim pesan. Boleh dikosongkan.
+    = f.text_area :message
+
+  .field
+    = f.label :recipient
+      | Ke siapakah bakal dibacakan pesannya? Cuma untuk orang-orang yang bekerja di KMK. Bisa satu orang atau grup.
+      | Tapi untuk orang-orang yang kasat mata saja. Jadi penghuni dunia halus di lantai 14 tidak masuk hitungan.
+    = f.text_field :recipient
+
+  .field
+    = f.label :anonymous_sending_message
+      | Anonim? Apakah nama Anda mau disebut saat dibacakan pesannya?
+    = f.select :anonymous_sending_message, [ 'Tidak. Saya ingin nama saya dikumandangkan.',
+                                             'Ya. Saya malu-malu kucing.',
+                                             'Sesuka hati panitia deh.'], include_blank: true
 
   .actions = f.submit 'Kirim Data'
-
 
 - content_for :javascript do
 
@@ -81,7 +175,7 @@
 
     function base64_tofield_and_image(b64) {
       var src = "data:image/png;base64," + b64;
-      $('input#person_portrait_base64').val(src);
+      $('input#person_portrait_base64').val(b64);
       $('img#person_portrait').attr("src", src);
     };
 

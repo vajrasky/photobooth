@@ -10,6 +10,7 @@ class CreatePeople < ActiveRecord::Migration
       t.string  :email
       t.string  :phone_number
       t.string  :status
+      t.string  :hobbies
       t.timestamps
     end
   end
