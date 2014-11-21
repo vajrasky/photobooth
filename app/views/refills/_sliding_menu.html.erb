@@ -4,6 +4,7 @@
 
 <nav class="js-menu sliding-menu-content">
   <ul>
+    <li><%= link_to "New", new_person_path %></li>
     <li><%= link_to "All", root_path %></li>
     <li><%= link_to "Latest", person_path(Person.last) %></li>
     <li><%= link_to "Random!", person_path(Person.all.sample) %></li>

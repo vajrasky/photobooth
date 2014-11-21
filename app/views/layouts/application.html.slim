@@ -23,23 +23,26 @@ html
         = yield :header
       - else
         h1 = link_to image_tag('logo.png'), root_path
+        form#search
+          ul.search-types
+            li = link_to "New", new_person_path
+            li = link_to "All", root_path
+            li = link_to "Latest", person_path(Person.last)
+            li = link_to "Random!", person_path(Person.all.sample)
 
     = render "layouts/flashes"
 
     = yield
 
     footer
-      ul.departments
-        - %w(Redaksi Engineering Marketing Product Design Sales).shuffle.each do |department|
-          li.department = department
+
+      p.disclamer Informasi yang tersedia pada situs ini, termasuk tetapi tidak terbatas pada link, merek dagang, gambar serta ikon dimiliki ole pihak ketiga.
 
       p.copyright
         | © Copyright #{Date.today.year} KMK Online.
         br
         | All rights reserved.
 
-
-      p.disclamer Informasi yang tersedia pada situs ini, termasuk tetapi tidak terbatas pada link, merek dagang, gambar serta ikon dimiliki ole pihak ketiga.
 
     = render "layouts/javascript"
 

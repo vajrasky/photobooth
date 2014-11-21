@@ -1,5 +1,10 @@
 @charset 'utf-8';
 
+$header-background: rgb(92, 92, 92);
+$header-color: rgb(255, 255, 255);
+
+$orange: rgb(246, 102, 32);
+
 @import 'normalize-rails/normalize.css';
 @import 'bourbon';
 @import 'base/grid-settings';
@@ -7,15 +12,11 @@
 @import 'base/base';
 
 @import 'refills/search-bar';
-@import 'refills/side-image';
 @import 'refills/sliding-menu';
 @import 'refills/type-system-rounded';
 
-$header-background: rgb(92, 92, 92);
-$header-color: rgb(255, 255, 255);
-
 body {
-  max-width: 40em;
+  max-width: 50em;
   margin: 0 auto;
 }
 
@@ -151,6 +152,38 @@ article {
 
   .field .label--muted {
     font-weight: normal;
+  }
+}
+
+.show_person {
+  margin-top: -1em;
+  padding: 2em;
+  background: #F9F9F9;
+  overflow: hidden;
+
+  small {
+    background: $orange;
+    color: white;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: .50em;
+    font-weight: 800;
+    margin: 0 1em 0 0;
+    padding: 3px 8px;
+    text-transform: uppercase;
+  }
+
+  figure {
+    margin: 0;
+    background: $dark-gray;
+    min-width: 320px;
+    min-height: 240px;
+    float: left;
+    margin-right: 2em;
+
+    img {
+      display: block;
+    }
   }
 }
 
