@@ -13,7 +13,8 @@ article
     - Person.all.each do |person|
       li.person
         figure
-          - if person.portrait_base64.present?
-            img src="data:image/png;base64,#{}" 
+          / - if person.portrait_base64.present?
+            img src="data:image/png;base64,#{person.portrait_base64}"
+          img src=person.portrait.thumb.url
         h5 = person.name
 
