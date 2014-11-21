@@ -24,7 +24,7 @@ html
       - else
         h1 = image_tag 'logo.png'
 
-    = render "flashes"
+    = render "layouts/flashes"
 
     = yield
 
@@ -32,7 +32,6 @@ html
       ul.departments
         - %w(Redaksi Engineering Marketing Product Design Sales).shuffle.each do |department|
           li.department = department
-
 
       p.copyright
         | © Copyright #{Date.today.year} KMK Online.
@@ -42,5 +41,5 @@ html
 
       p.disclamer Informasi yang tersedia pada situs ini, termasuk tetapi tidak terbatas pada link, merek dagang, gambar serta ikon dimiliki ole pihak ketiga.
 
-    = render "javascript"
+    = render "layouts/javascript"
 

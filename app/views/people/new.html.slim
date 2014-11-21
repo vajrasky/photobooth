@@ -1,8 +1,8 @@
-= form_for @person, url: save_people_path do |f|
+= form_for @person do |f|
 
   div style="width:330px;float:left;"
     #webcam
-    img src="webcamlogo.png" style=("vertical-align:text-top; display: inline-block;") /
+    = image_tag 'webcamlogo.png', style: "vertical-align:text-top; display: inline-block;"
     select#cameraNames onchange="changeCamera()" size="1" style=("width:245px; font-size:10px; height:25px; display: inline-block;")
 
   div style="width:135px;float:left;"
@@ -81,20 +81,17 @@
       option value="divorcee"  cerai
       option value="engaged_but_seeking"  udah ada, tapi masih cari yang lebih baik! ^_^
 
-  br/
-  br/
-  br/
+  / 
+    div
+      h2 Survei
 
-  div
-    h2 Survei
+    div | =======================
 
-  div | =======================
-
-  div
-    label
-      | Kalau seandainya Anda terdampar di suatu pulau selama sisa hidup Anda dan Anda diperbolehkan mengambil satu orang lawan jenis dari KMK untuk menemani Anda,
-      | siapakah yang bakal Anda pilih?:
-    input name="hobbies" style=("width: 300px;") type="text" /
+    div
+      label
+        | Kalau seandainya Anda terdampar di suatu pulau selama sisa hidup Anda dan Anda diperbolehkan mengambil satu orang lawan jenis dari KMK untuk menemani Anda,
+        | siapakah yang bakal Anda pilih?:
+      input name="hobbies" style=("width: 300px;") type="text" /
 
   div
     input type="submit" value=("Kirim data") /
@@ -102,43 +99,46 @@
 
 - content_for :javascript do
 
-  script language="JavaScript" src="/scriptcam.js"
-  script language="JavaScript"
-    | $(document).ready(function() {
-    | $("#webcam").scriptcam({
-    | onError:                  onError,
-    | onWebcamReady:            onWebcamReady,
-    | onPictureAsBase64:        base64_tofield_and_image
-    | });
-    | });
+  = javascript_include_tag 'scriptcam.js'
 
-    | function base64_tofield() {
-    | $('#portrait_base64').val($.scriptcam.getFrameAsBase64());
-    | };
+  javascript:
 
-    | function base64_toimage() {
-    | $('#portrait').attr("src","data:image/png;base64,"+$.scriptcam.getFrameAsBase64());
-    | };
+    $(document).ready(function() {
+      $("#webcam").scriptcam({
+        path:                     '/assets/',  // TODO: it's nasty how this is all relative :-(
+        onError:                  onError,
+        onWebcamReady:            onWebcamReady,
+        onPictureAsBase64:        base64_tofield_and_image
+      });
+    });
 
-    | function base64_tofield_and_image(b64) {
-    | var src = "data:image/png;base64," + b64;
-    | $('#portrait_base64').val(src);
-    | $('#portrait').attr("src", src);
-    | };
+    function base64_tofield() {
+      $('#portrait_base64').val($.scriptcam.getFrameAsBase64());
+    };
 
-    | function changeCamera() {
-    | $.scriptcam.changeCamera( $('#cameraNames').val() );
-    | }
+    function base64_toimage() {
+      $('#portrait').attr("src","data:image/png;base64,"+$.scriptcam.getFrameAsBase64());
+    };
 
-    | function onError(errorId,errorMsg) {
-    | $( "#btn2" ).attr( "disabled", true );
-    | alert(errorMsg);
-    | }
+    function base64_tofield_and_image(b64) {
+      var src = "data:image/png;base64," + b64;
+      $('#portrait_base64').val(src);
+      $('#portrait').attr("src", src);
+    };
 
-    | function onWebcamReady(cameraNames,camera,microphoneNames,microphone,volume) {
-    | $.each(cameraNames, function(index, text) {
-    | $('#cameraNames').append( $('<option></option>').val(index).html(text) )
-    | });
+    function changeCamera() {
+      $.scriptcam.changeCamera( $('#cameraNames').val() );
+    }
 
-    | $('#cameraNames').val(camera);
-    | }
+    function onError(errorId,errorMsg) {
+      $( "#btn2" ).attr( "disabled", true );
+      alert(errorMsg);
+    }
+
+    function onWebcamReady(cameraNames,camera,microphoneNames,microphone,volume) {
+      $.each(cameraNames, function(index, text) {
+        $('#cameraNames').append( $('<option></option>').val(index).html(text) )
+      });
+
+      $('#cameraNames').val(camera);
+    }

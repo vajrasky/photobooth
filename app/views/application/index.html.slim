@@ -5,6 +5,11 @@
 
 article
   ul.people
+    li.person.person--add
+      = link_to new_people_path
+        figure +
+        h5 You
+
     - Person.all.each do |person|
       li.person
         figure

@@ -94,6 +94,19 @@ article {
 .person {
   text-align: center;
 
+  &.person--add {
+    a {
+      color: $medium-gray;
+    }
+
+    figure {
+      font-size: 4em;
+      line-height: 170%;
+      border-color: darken($light-gray, 15%);
+      border-style: dashed;
+    }
+  }
+
   figure {
     height: 0;
     width: 100%;
@@ -103,8 +116,10 @@ article {
     overflow: hidden;
 
     background: $light-gray;
-    border: 1px solid darken($light-gray, 10%);
+    border: 2px solid darken($light-gray, 10%);
     border-radius: $base-border-radius;
+
+    box-sizing: content-box;
 
     img {
       width: 102%;
