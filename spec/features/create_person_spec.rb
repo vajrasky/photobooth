@@ -18,22 +18,35 @@ describe "creating a person" do
       fill_in 'person[email]',        with: @person.email
       fill_in 'person[phone_number]', with: @person.phone_number
       select  'Jomblo',               from: 'person[status]'
+      select 'Ke Maja House',         from: 'person[what_to_do_at_second_night]'
 
       # survey questions
-      # fill_in 'hobbies',      with: "speaking like a king, dancing like a star"
-      # fill_in 'dump_in_island_opposite_sex', :with => @person.dump_in_island_opposite_sex
-      # fill_in 'dump_in_island_same_sex', :with => @person.dump_in_island_same_sex
-      # fill_in 'what_to_do_with_500k_rupiah', :with => @person.what_to_do_with_500k_rupiah
-      # fill_in 'superpower', :with => @person.superpower
-      # fill_in 'message', :with => @person.message
-      # fill_in 'recipient', :with => @person.recipient
-      # fill_in 'what_to_do_at_second_night', :with => @person.what_to_do_at_second_night
+      fill_in 'person[hobbies]',                     with: "speaking like a king, dancing like a star"
+      fill_in 'person[dump_in_island_opposite_sex]', with: "james dune"
+      fill_in 'person[dump_in_island_same_sex]',     with: "beyonce gugu"
+      select 'Donasi ke yayasan amal',               from: 'person[what_to_do_with_500k_rupiah]'
+      choose "person_superpower_mindreader"
+
+      # sending message
+      fill_in 'person[message]',                            :with => "Aku cinta kamu. Kamu cinta dia. Dia cinta aku."
+      fill_in 'person[recipient]',                          :with => "Batman"
+      select "Tidak. Saya ingin nama saya dikumandangkan.", :from => 'person[anonymous_sending_message]'
 
       click_button 'Kirim Data'
     end
 
     expect(current_path).to eq('/')
     expect(page).to have_content(@person.name)
+
+    p = Person.last
+    expect(p.message).to eq("Aku cinta kamu. Kamu cinta dia. Dia cinta aku.")
+    expect(p.recipient).to eq("Batman")
+    expect(p.anonymous_sending_message).to eq("Tidak. Saya ingin nama saya dikumandangkan.")
+    expect(p.what_to_do_with_500k_rupiah).to eq("Donasi ke yayasan amal")
+    expect(p.superpower).to eq("mindreader")
+    expect(p.dump_in_island_opposite_sex).to eq("james dune")
+    expect(p.dump_in_island_same_sex).to eq("beyonce gugu")
+    expect(p.hobbies).to eq("speaking like a king, dancing like a star")
   end
 
 end
