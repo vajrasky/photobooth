@@ -1,12 +1,18 @@
 = form_for @person do |f|
 
+  - if @person.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@person.errors.count, "error")} prohibited this person from being saved:"
+      ul
+        - @person.errors.full_messages.each do |message|
+          li = message
+
   div style="width:330px;float:left;"
     #webcam
     = image_tag 'webcamlogo.png', style: "vertical-align:text-top; display: inline-block;"
     select#cameraNames onchange="changeCamera()" size="1" style=("width:245px; font-size:10px; height:25px; display: inline-block;")
 
   div style="width:135px;float:left;"
-    p
     button#btn2.btn.btn-small onclick=("base64_tofield_and_image($.scriptcam.getFrameAsBase64()); return false;")  Snapshot to image
 
   div style="width:200px;float:left;"
@@ -17,71 +23,32 @@
 
   div style=("clear:both; width: 100%;")
 
-  div
-    label Nama:
-    input name="name" style=("width: 300px;") type="text" /
+  .field
+    = f.label :name, 'Nama:'
+    = f.text_field :name
 
-  div
-    label Jenis Kelamin:
-    select name="sex"
-      option value="male"  Cowok
-      option value="female"  Cewek
-      option value="transgender"  Transgender
-      option value=""  Tidak mau jawab
+  .field
+    = f.label :sex, 'Jenis Kelamin:'
+    = f.select :sex, ['Cowok', 'Cewek', 'Transgender', 'Tidak mau jawab']
 
-  div
-    label Divisi:
-    select name="division"
-      option value="pemred_and_sekred"  Pemred dan Sekred
-      option value="digital_marketing"  Digital Marketing
-      option value="redaksi_bola"  Redaksi Bola
-      option value="redaksi_showbiz_dan_bintang"  Redaksi Showbiz dan Bintang
-      option value="redaksi_bisnis"  Redaksi Bisnis
-      option value="redaksi_health"  Redaksi Health
-      option value="redaksi_tekno"  Redaksi Tekno
-      option value="redaksi_lifestyle"  Redaksi Lifestyle
-      option value="redaksi_automotive"  Redaksi Automotive
-      option value="redaksi_news"  Redaksi News
-      option value="community_dev_and_monitoring"  Community Dev and Monitoring
-      option value="kanal_foto_and_gathering_foto_video"  Kanal Foto dan Gathering Foto Video
-      option value="multimedia"  Multimedia
-      option value="creative"  Creative
-      option value="operation"  Operation
-      option value="finance_accounting"  Finance Accounting
-      option value="ga_and_purchasing"  GA and Purchasing
-      option value="legal"  Legal
-      option value="hrd"  HRD
-      option value="customer_service"  Customer Service
-      option value="project"  Project
-      option value="digital_and_sales_support"  Digital and Sales Support
-      option value="sales_marketing"  Sales Marketing
-      option value="engineering"  Engineering
-      option value="product_development"  Product Development
-      option value="marketing_and_business_alliance_div"  Marketing and Business Alliance Div
-      option value="social_media"  Social Media
-      option value="busdev_and_vas"  Busdev and Vas
-      option value="marketing_and_brand"  Marketing and Brand
+  .field
+    = f.label :division, 'Divisi:'
+    = f.select :division, ['Pemred dan Sekred', 'Digital Marketing', 'Redaksi Bola', 'Redaksi Showbiz dan Bintang', 'Redaksi Bisnis', 'Redaksi Health', 'Redaksi Tekno', 'Redaksi Lifestyle', 'Redaksi Automotive', 'Redaksi News', 'Community Dev and Monitoring', 'Kanal Foto dan Gathering Foto Video', 'Multimedia', 'Creative', 'Operation', 'Finance Accounting', 'GA and Purchasing', 'Legal', 'HRD', 'Customer Service', 'Project', 'Digital and Sales Support', 'Sales Marketing',
+'Engineering', 'Product Development', 'Marketing and Business Alliance Div', 'Social Media', 'Busdev and Vas', 'Marketing and Brand']
 
-  div
-    label Alamat surat elektronik:
-    input name="email" style=("width: 300px;") type="text" /
+  .field
+    = f.label :email, 'Alamat surat elektronik:'
+    = f.text_field :email
 
-  div
-    label Telepon:
-    input name="phone_number" style=("width: 300px;") type="text" /
+  .field
+    = f.label :phone_number, 'Telepon:'
+    = f.text_field :phone_number
 
-  div
-    label Status:
-    select name="status"
-      option value="single"  jomblo
-      option value="engaged"  tunangan
-      option value="married"  menikah
-      option value="celibacy"  selibat
-      option value="just_broke_up"  baru putus
-      option value="divorcee"  cerai
-      option value="engaged_but_seeking"  udah ada, tapi masih cari yang lebih baik! ^_^
+  .field
+    = f.label :status, 'Status:'
+    = f.select :status, [ 'jomblo', 'tunangan', 'menikah', 'selibat', 'baru putus', 'cerai', 'udah ada, tapi masih cari yang lebih baik! ^_^' ]
 
-  / 
+  /
     div
       h2 Survei
 
@@ -93,8 +60,8 @@
         | siapakah yang bakal Anda pilih?:
       input name="hobbies" style=("width: 300px;") type="text" /
 
-  div
-    input type="submit" value=("Kirim data") /
+
+  .actions = f.submit 'Kirim Data'
 
 
 - content_for :javascript do

@@ -1,21 +1,22 @@
 require "rails_helper"
 
-describe "the peoples page" do
+describe "creating a person" do
 
-  it "shows me all the people", driver: :chrome do
+  it "saves valid people and shows them on the root page", driver: :chrome do
     @person = FactoryGirl.build :person
 
-    visit "/orang/new"
+    visit '/'
+    click_link 'You'
+    expect(current_path).to eq('/orang/new')
 
-    within("#new_person") do
-      # id questions
+    within('#new_person') do
 
-      fill_in 'name',        with: @person.name
-      select  'Cewek',       from: 'sex'
-      select  'Engineering', from: 'division'
-      fill_in 'email',       with: @person.email
-      fill_in 'phone_number', with: @person.phone_number
-      select  'jomblo',       from: 'status'
+      fill_in 'person[name]',         with: @person.name
+      select  'Cewek',                from: 'person[sex]'
+      select  'Engineering',          from: 'person[division]'
+      fill_in 'person[email]',        with: @person.email
+      fill_in 'person[phone_number]', with: @person.phone_number
+      select  'jomblo',               from: 'person[status]'
 
       # survey questions
       # fill_in 'hobbies',      with: "speaking like a king, dancing like a star"
@@ -27,7 +28,7 @@ describe "the peoples page" do
       # fill_in 'recipient', :with => @person.recipient
       # fill_in 'what_to_do_at_second_night', :with => @person.what_to_do_at_second_night
 
-      click_button 'Kirim data'
+      click_button 'Kirim Data'
     end
 
     expect(current_path).to eq('/')

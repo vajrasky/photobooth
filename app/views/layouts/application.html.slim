@@ -22,7 +22,7 @@ html
       - if content_for? :header
         = yield :header
       - else
-        h1 = image_tag 'logo.png'
+        h1 = link_to image_tag('logo.png'), root_path
 
     = render "layouts/flashes"
 

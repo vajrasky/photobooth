@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # get   'create',           to: 'application#create'
   # post  'save',             to: 'application#save',        as: 'save_people'
 
-  resource :people, path: 'orang'
+  resources :people, path: 'orang'
 
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
