@@ -4,9 +4,9 @@
 
 <nav class="js-menu sliding-menu-content">
   <ul>
-    <li><a href="javascript:void(0)">All</a></li>
-    <li><a href="javascript:void(0)">Latest</a></li>
-    <li><a href="javascript:void(0)">Random!</a></li>
+    <li><%= link_to "All", root_path %></li>
+    <li><%= link_to "Latest", person_path(Person.last) %></li>
+    <li><%= link_to "Random!", person_path(Person.all.sample) %></li>
   </ul>
 </nav>
 

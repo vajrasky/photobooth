@@ -1,7 +1,12 @@
 - content_for :header
   h1 = image_tag 'logo.png'
   form#search
+    ul.search-types
+      li = link_to "All", root_path
+      li = link_to "Latest", person_path(Person.last)
+      li = link_to "Random!", person_path(Person.all.sample)
     = render "refills/search_bar"
+
 
 article
   ul.people
@@ -12,9 +17,10 @@ article
 
     - Person.all.each do |person|
       li.person
-        figure
-          / - if person.portrait_base64.present?
-            img src="data:image/png;base64,#{person.portrait_base64}"
-          img src=person.portrait.thumb.url
-        h5 = person.name
+        = link_to person
+          figure
+            / - if person.portrait_base64.present?
+              img src="data:image/png;base64,#{person.portrait_base64}"
+            img src=person.portrait.thumb.url
+          h5 = person.name
 
