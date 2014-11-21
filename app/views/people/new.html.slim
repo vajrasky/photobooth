@@ -7,17 +7,13 @@
         - @person.errors.full_messages.each do |message|
           li = message
 
-  div style="width:330px;float:left;"
-    #webcam
-    = image_tag 'webcamlogo.png', style: "vertical-align:text-top; display: inline-block;"
-    select#cameraNames onchange="changeCamera()" size="1" style=("width:245px; font-size:10px; height:25px; display: inline-block;")
+  #webcam
+  button#snapshot Snapshot!
 
   .field
-    button.button onclick=("base64_tofield_and_image( $.scriptcam.getFrameAsBase64() ); return false;") Snapshot to image
+    = f.label :portrait_base64, 'Gambar:'
     = f.hidden_field :portrait_base64
-    img#person_portrait style="width:200px;height:153px;"
-
-  div style="width:100%; clear:both"
+    img#person_portrait style="width:320px; height:240px;"
 
   .field
     = f.label :name, 'Nama:'
@@ -164,14 +160,13 @@
 
   javascript:
 
-    $(document).ready(function() {
-      $("#webcam").scriptcam({
-        path:                     '/assets/',  // TODO: it's nasty how this is all relative :-(
-        onError:                  onError,
-        onWebcamReady:            onWebcamReady,
-        onPictureAsBase64:        base64_tofield_and_image
+    function onWebcamReady(cameraNames, camera, microphoneNames, microphone, volume) {
+      $.each(cameraNames, function(index, text) {
+        console.log("cameraName ", index, " is called: ", text);
       });
-    });
+
+      $.scriptcam.changeCamera( camera );
+    }
 
     function base64_tofield_and_image(b64) {
       var src = "data:image/png;base64," + b64;
@@ -179,18 +174,22 @@
       $('img#person_portrait').attr("src", src);
     };
 
-    function changeCamera() {
-      $.scriptcam.changeCamera( $('#cameraNames').val() );
-    }
-
     function onError(errorId,errorMsg) {
       alert(errorMsg);
     }
 
-    function onWebcamReady(cameraNames,camera,microphoneNames,microphone,volume) {
-      $.each(cameraNames, function(index, text) {
-        $('#cameraNames').append( $('<option></option>').val(index).html(text) )
-      });
+    $("#webcam").scriptcam({
+      path:                     '/assets/',  // TODO: it's nasty how this is all relative :-(
+      width:                    800,
+      height:                   600,
+      onWebcamReady:            onWebcamReady,
+      onPictureAsBase64:        base64_tofield_and_image,
+      onError:                  onError
+    });
 
-      $('#cameraNames').val(camera);
-    }
+    $("#snapshot").on('click', function() {
+      base64_tofield_and_image( $.scriptcam.getFrameAsBase64() );
+      return false;
+    });
+
+

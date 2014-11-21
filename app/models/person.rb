@@ -16,7 +16,8 @@ class Person < ActiveRecord::Base
 
   mount_uploader :portrait, PortraitUploader
 
-  validates :name,
+  validates :portrait_base64,
+            :name,
             :sex,
             :division,
             :email,

@@ -1,5 +1,18 @@
-Woi123
+Photobooth
 ======
+
+
+
+
+To-Dos
+-------
+
+- internationalization of validations and form fields
+- placeholders for inputs -- suggestions for email etc
+
+
+
+
 
 Getting Started
 ---------------
@@ -24,12 +37,3 @@ is [purposefully excluded from the project's `Gemfile`][exclude].
 [foreman]: https://github.com/ddollar/foreman
 [exclude]: https://github.com/ddollar/foreman/pull/437#issuecomment-41110407
 
-Guidelines
-----------
-
-Use the following guides for getting things done, programming well, and
-programming in style.
-
-* [Protocol](http://github.com/thoughtbot/guides/blob/master/protocol)
-* [Best Practices](http://github.com/thoughtbot/guides/blob/master/best-practices)
-* [Style](http://github.com/thoughtbot/guides/blob/master/style)
