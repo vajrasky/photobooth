@@ -10,13 +10,14 @@ describe "creating a person" do
     expect(current_path).to eq('/orang/new')
 
     within('#new_person') do
+      page.execute_script("$('#person_portrait_base64').val('iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEUAAAD///+l2Z/dAAAAM0lEQVR4nGP4/5/h/1+G/58ZDrAz3D/McH8yw83NDDeNGe4Ug9C9zwz3gVLMDA/A6P9/AFGGFyjOXZtQAAAAAElFTkSuQmCC')")
 
       fill_in 'person[name]',         with: @person.name
       select  'Cewek',                from: 'person[sex]'
       select  'Engineering',          from: 'person[division]'
       fill_in 'person[email]',        with: @person.email
       fill_in 'person[phone_number]', with: @person.phone_number
-      select  'jomblo',               from: 'person[status]'
+      select  'Jomblo',               from: 'person[status]'
 
       # survey questions
       # fill_in 'hobbies',      with: "speaking like a king, dancing like a star"
